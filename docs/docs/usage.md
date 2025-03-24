@@ -8,7 +8,7 @@ Do not run this too often: it is a heuristic to help test, not a replacement for
 
 ### Installing
 
-The tool is a command line tool that relies on having at least the Firefox webdriver to run. You can optionaly run it with a Chrome driver, but this needs to be installed. 
+The tool is a command line tool that relies on having at least the Firefox webdriver to run. You can optionally run it with a Chrome driver, but this needs to be installed. 
 
 ### Using the Tool
 
