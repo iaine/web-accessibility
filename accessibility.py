@@ -5,6 +5,32 @@ import os
 import getopt, sys
 from browser import Browser
 
+def get_url(url, chrome=False):
+    '''
+    Method to test for one url
+    '''
+    Browser(url, "ff")
+
+    if chrome:
+        Browser(url, "chrome")
+
+def get_urls(filename, chrome=False):
+    '''
+    Method to test for one url
+    '''
+    fh = open(file, "r")
+    data = fh.readlines()
+    for line in data:
+        getline = line.split(',')
+        urls.append(getline[1])
+    fh.close()
+
+    for url in urls:
+        Browser(url, "ff")
+        if chrome:
+            Browser(url, "chrome")
+    
+
 def usage():
     '''
     Help function
@@ -21,7 +47,7 @@ def usage():
 
 def main():
     try:
-        opts, args = getopt.getopt(sys.argv[1:], "huf:", ["help", "url=", 'file='])
+        opts, args = getopt.getopt(sys.argv[1:], "hufc:", ["help", "url=", 'file='])
     except getopt.GetoptError as err:
         # print help information and exit:
         print(err)  # will print something like "option -a not recognized"
@@ -29,16 +55,19 @@ def main():
         sys.exit(2)
     url = None
     filename = None
+    chrome = False
     for o, a in opts:
         if o == "-v":
             verbose = True
         elif o in ("-h", "--help"):
             usage()
             sys.exit()
-        elif o in ("-u", "--output"):
+        elif o in ("-u", "--url"):
             output = a
-        elif o in ("-f", "--output"):
+        elif o in ("-f", "--file"):
             filename = a
+        elif o in ("-c", "--chrome"):
+            chrome = True
         else:
             assert False, "unhandled option"
 
@@ -48,24 +77,14 @@ def main():
         sys.exit(2)
 
     urls=[]
-    
+
     if not os.path.exists('./reports'): os.mkdir('./reports')
 
     if file is not None:
-        fh = open(file, "r")
-        data = fh.readlines()
-        for line in data:
-            getline = line.split(',')
-            urls.append(getline[1])
-        fh.close()
+        get_urls(file, chrome)
 
-    
-
-    
-
-    base_url = "https://warwick.ac.uk/fac/cross_fac/cim/"
-
-    Browser(base_url, "ff")
+    if url is not None:
+        get_url(url, chrome)
 
 if __name__ == "__main__":
     main()
