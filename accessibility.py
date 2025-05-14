@@ -12,10 +12,10 @@ def get_url(url, chrome=False):
     '''
     Method to test for one url
     '''
-    Browser(url, "ff")
+    Browser(url, "chrome")
 
-    if chrome:
-        Browser(url, "chrome")
+    if not chrome:
+        Browser(url, "ff")
 
 def get_urls(filename, chrome=False):
     '''
@@ -29,9 +29,9 @@ def get_urls(filename, chrome=False):
     fh.close()
 
     for url in urls:
-        Browser(url, "ff")
-        if chrome:
-            Browser(url, "chrome")
+        Browser(url, "chrome")
+        if not chrome:
+            Browser(url, "ff")
     
 
 def usage():
@@ -58,7 +58,7 @@ def main():
         sys.exit(2)
     url = None
     filename = None
-    chrome = False
+    chrome = True
     for o, a in opts:
         if o == "-v":
             verbose = True
@@ -70,7 +70,7 @@ def main():
         elif o in ("-f", "--file"):
             filename = a
         elif o in ("-c", "--chrome"):
-            chrome = True
+            chrome = False
         else:
             assert False, "unhandled option"
 
