@@ -1,8 +1,11 @@
 '''
 Script to read the CIM site and run accessibility test
 '''
+import getopt
 import os
-import getopt, sys
+import shutil
+import sys
+
 from browser import Browser
 
 def get_url(url, chrome=False):
@@ -78,7 +81,18 @@ def main():
 
     urls=[]
 
-    if not os.path.exists('./reports'): os.mkdir('./reports')
+    if not os.path.exists('./reports'): 
+        os.mkdir('./reports')
+    else:
+        for filename in os.listdir('./reports'):
+            file_path = os.path.join(folder, filename)
+            try:
+                if os.path.isfile(file_path) or os.path.islink(file_path):
+                    os.unlink(file_path)
+                elif os.path.isdir(file_path):
+                    shutil.rmtree(file_path)
+            except Exception as e:
+                print('Failed to delete %s. Reason: %s' % (file_path, e))
 
     if file is not None:
         get_urls(file, chrome)
