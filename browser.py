@@ -39,7 +39,6 @@ class Browser():
         options = Options()
         options.add_argument("-headless")
         driver = webdriver.Chrome(options=options)
-
         reportname = "./reports/{}_chrome_report.json".format(self.url.replace("https://warwick.ac.uk/fac/cross_fac/", "").replace('/', "_"))
         self._browse(driver, reportname)
 
@@ -51,9 +50,10 @@ class Browser():
             :param reportname - name for the report
         '''
 
-        axe_script = open('./axe.min.js', 'r')
+        driver.get(self.url)
+        driver.implicitly_wait(10)
 
-        driver.implicitly_wait(5)
+        axe_script = open('./axe.min.js', 'r')
         
         driver.execute_script(axe_script.read())
 
