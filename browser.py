@@ -57,7 +57,7 @@ class Browser():
 
         axe_script.close()
 
-        driver.implicitly_wait(3)
+        driver.implicitly_wait(5)
 
         result = driver.execute_async_script('var callback = arguments[arguments.length - 1];'
                                             'axe.run().then(results => callback(results))')
