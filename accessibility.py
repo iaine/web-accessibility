@@ -35,7 +35,7 @@ def get_urls(filename, chrome=False):
             Browser(url, "chrome")
             if not chrome:
                 Browser(url, "ff")
-            time.sleep(5)
+
         else:
             print("{} is incorrect url".format(url))
     
@@ -62,7 +62,7 @@ def main():
         usage()
         sys.exit(2)
     url = None
-    filename = None
+    urlfilename = None
     chrome = True
 
     for o, a in opts:
@@ -74,13 +74,13 @@ def main():
         elif o in ("-u", "--url"):
             output = a
         elif o in ("-f", "--file"):
-            filename = a
+            urlfilename = a
         elif o in ("-c", "--chrome"):
             chrome = False
         else:
             assert False, "unhandled option"
 
-    if filename is not None and url is not None:
+    if urlfilename is not None and url is not None:
         print("Error in options.Please read the usage.")
         usage()
         sys.exit(2)
@@ -90,6 +90,8 @@ def main():
     if not os.path.exists('./reports'): 
         os.mkdir('./reports')
     else:
+        folder = './reports/' + str(int(time.time()))
+        os.mkdir(folder)
         for filename in os.listdir('./reports'):
             file_path = os.path.join(folder, filename)
             try:
@@ -100,8 +102,8 @@ def main():
             except Exception as e:
                 print('Failed to delete %s. Reason: %s' % (file_path, e))
 
-    if filename is not None:
-        get_urls(filename, chrome)
+    if urlfilename is not None:
+        get_urls(urlfilename, chrome)
 
     if url is not None:
         get_url(url, chrome)
