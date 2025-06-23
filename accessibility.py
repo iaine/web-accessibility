@@ -24,11 +24,9 @@ def get_urls(filename, chrome=False):
     '''
     Method to test for one url
     '''
+
     fh = open(filename, "r")
-    data = fh.readlines()
-    for line in data:
-        getline = line.split(',')
-        urls.append(getline[1])
+    urls = fh.readlines()
     fh.close()
 
     for url in urls:
@@ -59,13 +57,12 @@ def main():
         opts, args = getopt.getopt(sys.argv[1:], "h:u:f:c:", ["help", "url=", 'file=', 'chrome'])
     except getopt.GetoptError as err:
         # print help information and exit:
-        print(err)  # will print something like "option -a not recognized"
         usage()
         sys.exit(2)
     url = None
     filename = None
     chrome = True
-    print(opts)
+
     for o, a in opts:
         if o == "-v":
             verbose = True
@@ -102,9 +99,6 @@ def main():
                 print('Failed to delete %s. Reason: %s' % (file_path, e))
 
     if filename is not None:
-        print("filename")
-        print(filename)
-        print("----------")
         get_urls(filename, chrome)
 
     if url is not None:
