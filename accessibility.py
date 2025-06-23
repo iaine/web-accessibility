@@ -1,5 +1,5 @@
 '''
-Script to read the CIM site and run accessibility test
+Script to run accessibility test on defined urls
 '''
 import getopt
 import os
