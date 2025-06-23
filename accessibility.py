@@ -12,6 +12,9 @@ def get_url(url, chrome=False):
     '''
     Method to test for one url
     '''
+    if not url.strip().startswith("http"):
+        print("Incorrect url format for: " + str(url))
+
     Browser(url, "chrome")
 
     if not chrome:
@@ -29,10 +32,12 @@ def get_urls(filename, chrome=False):
     fh.close()
 
     for url in urls:
-        if not url.strip().startswith("http"):
-        Browser(url, "chrome")
-        if not chrome:
-            Browser(url, "ff")
+        if url.strip().startswith("http"):
+            Browser(url, "chrome")
+            if not chrome:
+                Browser(url, "ff")
+        else:
+            print("{} is incorrect url".format(url))
     
 
 def usage():
