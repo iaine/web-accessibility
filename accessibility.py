@@ -5,6 +5,7 @@ import getopt
 import os
 import shutil
 import sys
+import time
 
 from browser import Browser
 
@@ -34,6 +35,7 @@ def get_urls(filename, chrome=False):
             Browser(url, "chrome")
             if not chrome:
                 Browser(url, "ff")
+            time.sleep(5)
         else:
             print("{} is incorrect url".format(url))
     
