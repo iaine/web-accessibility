@@ -57,6 +57,8 @@ class Browser():
 
         axe_script.close()
 
+        driver.implicitly_wait(3)
+
         result = driver.execute_async_script('var callback = arguments[arguments.length - 1];'
                                             'axe.run().then(results => callback(results))')
         file = open(report_name, "w")
