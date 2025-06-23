@@ -53,11 +53,11 @@ class Browser():
 
         axe_script = open('./axe.min.js', 'r')
 
+        driver.implicitly_wait(5)
+        
         driver.execute_script(axe_script.read())
 
         axe_script.close()
-
-        driver.implicitly_wait(5)
 
         result = driver.execute_async_script('var callback = arguments[arguments.length - 1];'
                                             'axe.run().then(results => callback(results))')
