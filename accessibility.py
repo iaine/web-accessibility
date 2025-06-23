@@ -29,6 +29,7 @@ def get_urls(filename, chrome=False):
     fh.close()
 
     for url in urls:
+        if not url.strip().startswith("http"):
         Browser(url, "chrome")
         if not chrome:
             Browser(url, "ff")
