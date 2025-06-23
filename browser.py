@@ -1,8 +1,7 @@
 '''
-Script to read browser. 
+Script to read browser using selenium driver. 
 
-Needs to be altered to take a list of URLs or follow them. 
-Needs to run with different browsers: Chrome, Edge, Safari at least. 
+You must have the drivers installed. 
 '''
 import json
 from selenium import webdriver
