@@ -2,43 +2,9 @@
 Script to run accessibility test on defined urls
 '''
 import getopt
-import os
-import shutil
 import sys
-import time
 
-from browser import Browser
-
-def get_url(url, chrome=False):
-    '''
-    Method to test for one url
-    '''
-    if not url.strip().startswith("http"):
-        print("Incorrect url format for: " + str(url))
-
-    Browser(url, "chrome")
-
-    if not chrome:
-        Browser(url, "ff")
-
-def get_urls(filename, chrome=False):
-    '''
-    Method to test for one url
-    '''
-
-    fh = open(filename, "r")
-    urls = fh.readlines()
-    fh.close()
-
-    for url in urls:
-        if url.strip().startswith("http"):
-            Browser(url, "chrome")
-            if not chrome:
-                Browser(url, "ff")
-
-        else:
-            print("{} is incorrect url".format(url))
-    
+from automate import Automate
 
 def usage():
     '''
@@ -87,27 +53,15 @@ def main():
 
     urls=[]
 
-    if not os.path.exists('./reports'): 
-        os.mkdir('./reports')
-    else:
-        folder = './reports/' + str(int(time.time()))
-        os.mkdir(folder)
-        for filename in os.listdir('./reports'):
-            file_path = os.path.join(folder, filename)
-            try:
-                if not os.path.isdir('./reports/' + filename):
-                    shutil.copy('./reports/' + filename, file_path)
-                else:
-                    if filename != './reports/' + filename:
-                        shutil.rmtree(filename)
-            except Exception as e:
-                print('Failed to delete %s. Reason: %s' % (file_path, e))
+    automated = Automate()
+
+    automated.update_folders()
 
     if urlfilename is not None:
-        get_urls(urlfilename, chrome)
+        automated.get_urls(urlfilename, chrome)
 
     if url is not None:
-        get_url(url, chrome)
+        automated.get_url(url, chrome)
 
 if __name__ == "__main__":
     main()
