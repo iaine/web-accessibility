@@ -80,7 +80,7 @@ def main():
         else:
             assert False, "unhandled option"
 
-    if file is not None and url is not None:
+    if filename is not None and url is not None:
         print("Error in options.Please read the usage.")
         usage()
         sys.exit(2)
@@ -100,8 +100,8 @@ def main():
             except Exception as e:
                 print('Failed to delete %s. Reason: %s' % (file_path, e))
 
-    if file is not None:
-        get_urls(file, chrome)
+    if filename is not None:
+        get_urls(filename, chrome)
 
     if url is not None:
         get_url(url, chrome)
