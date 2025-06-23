@@ -1,10 +1,12 @@
 ## Using the Accessibility test tool
 
-The tool t akes a series of urls or a single url to support accessibility testing.
+The tool takes a series of urls or a single url to support accessibility testing.
 
-It uses the axe library to test. 
+It uses the axe library to run automated tests.
     
 Do not run this too often: it is a heuristic to help test, not a replacement for manual testing. Results may change between runs.
+
+Please also note that this tool does not replace manual testing. It is an additional tool. 
 
 ### Installing
 
@@ -45,9 +47,3 @@ Chrome
 ```
 python accessibility.py -c -f mylist.csv
 ```
-or 
-```
-python accessibility.py chome -file=mylist.csv
-```
-
-This will enable Chrome as a driver. 
