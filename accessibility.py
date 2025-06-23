@@ -25,10 +25,7 @@ def get_urls(filename, chrome=False):
     Method to test for one url
     '''
     fh = open(filename, "r")
-    data = fh.readlines()
-    for line in data:
-        getline = line.split(',')
-        urls.append(getline[1])
+    urls = fh.readlines()
     fh.close()
 
     for url in urls:
