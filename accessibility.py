@@ -97,6 +97,9 @@ def main():
             try:
                 if not os.path.isdir('./reports/' + filename):
                     shutil.copy('./reports/' + filename, file_path)
+                else:
+                    if filename != './reports/' + filename:
+                        shutil.rmtree(filename)
             except Exception as e:
                 print('Failed to delete %s. Reason: %s' % (file_path, e))
 
